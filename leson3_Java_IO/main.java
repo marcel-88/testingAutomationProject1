@@ -107,6 +107,7 @@ public class Main
 	}
 	
 	
+	/*Old code
 	public static int count_Words(String word)
 	{
 		int counter=0;
@@ -145,6 +146,53 @@ public class Main
 			System.out.println("An error occurred! See the stacktrace below");
 			e.printStackTrace();
 		}
+		return counter;
+	}
+	Ending old code*/
+	
+	
+	//New code
+	public static int count_Words(String word)
+	{
+		int counter = 0;
+		
+		try
+		{
+			File file3 = new File("file3.txt");
+			
+			if (file3.exists())
+			{
+				FileReader file3_Reader = new FileReader(file3, StandardCharsets.UTF_8);
+				String temp = "";
+				char c;
+				
+				while ((c = (char)file3_Reader.read()) != '\uffff')
+				{
+					if (!Character.isLetterOrDigit(c))
+					{
+						if (word.equalsIgnoreCase(temp))
+						{
+							counter++;
+						}
+						
+						temp = "";
+						continue;
+					}
+					temp += c;
+				}
+				
+				if (word.equalsIgnoreCase(temp))
+				{
+					counter++;
+				}
+			}
+		}
+		catch (IOException e)
+		{
+			System.out.println("An error occurred! See the stacktrace below");
+			e.printStackTrace();
+		}
+		
 		return counter;
 	}
 	
